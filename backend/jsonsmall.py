@@ -24,4 +24,4 @@ for recipe in data:
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(filtered, f, ensure_ascii=False, indent=2)
 
-print(f"✅ {len(filtered)} recipes written to {OUTPUT_FILE}")
+print(f"{len(filtered)} recipes written to {OUTPUT_FILE}")
