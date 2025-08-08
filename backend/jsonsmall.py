@@ -1,7 +1,7 @@
 import json
 
-INPUT_FILE = "recipes.json"
-OUTPUT_FILE = "recipes_small.json"
+INPUT_FILE = "recipes_original.json"
+OUTPUT_FILE = "recipes.json"
 MAX_RECIPES = 90000  # recipe from the big data (from 522516 recipes)
 
 with open(INPUT_FILE, "r", encoding="utf-8") as f:
