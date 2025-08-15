@@ -64,7 +64,10 @@
       }
 
       resultsDiv.innerHTML = "";
-      data.forEach(recipe => {
+
+      // Global variable to store recipes
+      window._recipes = data;
+      data.forEach((recipe, idx) => {
         const card = document.createElement("div");
         card.className = "col-md-4";
 
@@ -78,7 +81,7 @@
               <p class="card-text"><strong>By:</strong> ${recipe.author_name || "Unknown"}</p>
               <p class="card-text">${recipe.description || "No description provided."}</p>
               <p><strong>Matched Ingredients:</strong> ${recipe.matched_ingredients.join(", ")}</p>
-              <button class="btn btn-outline-primary mt-auto" onclick='showRecipeModal(${JSON.stringify(recipe)})'>Show Recipe</button>
+              <button class="btn btn-outline-primary mt-auto" onclick='showRecipeModal(${idx})'>Show Recipe</button>
             </div>
           </div>
         `;
@@ -91,15 +94,14 @@
     }
   }
 
-  function showRecipeModal(recipe) {
+  function showRecipeModal(idx) {
+    const recipe = window._recipes[idx];
     document.getElementById("modalRecipeTitle").textContent = recipe.name;
     document.getElementById("modalAuthor").textContent = recipe.author_name || "Unknown";
     document.getElementById("modalDescription").textContent = recipe.description || "-";
     document.getElementById("modalTime").textContent = recipe.time || "-";
     document.getElementById("modalInstructions").textContent = recipe.instructions || "-";
-    document.getElementById("modalImage").src = recipe.image_url && recipe.image_url !== "" 
-      ? recipe.image_url 
-      : "https://via.placeholder.com/555x416?text=No+Image";
+    document.getElementById("modalImage").src = recipe.image_url;
 
     const ingList = document.getElementById("modalIngredients");
     ingList.innerHTML = "";
